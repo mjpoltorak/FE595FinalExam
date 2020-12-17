@@ -6,6 +6,7 @@ app = flask.Flask(__name__)
 
 
 def pickle_predict(type, params):
+    # Checks which type of model to run and then loads the pickled file and predicts with the given input
     try:
         params_df = pd.DataFrame(params, index=[1])
         if type == 'logistic':
@@ -37,6 +38,7 @@ def help():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    # Get all data from POST json
     post_json = flask.request.json
     type = post_json.get('type', 'random_forest')
     receipts = post_json.get('receipts', None)
@@ -44,6 +46,7 @@ def predict():
     cash_on_hand_end_period = post_json.get('cash_on_hand_end_period', None)
     debts_owed_by_committee = post_json.get('debts_owed_by_committee', None)
     num_terms = post_json.get('num_terms', None)
+    # check if all required data is present
     if receipts is not None and disbursements is not None and cash_on_hand_end_period is not None and \
             debts_owed_by_committee is not None and num_terms is not None:
         params = {'receipts': receipts,'disbursements': disbursements,
