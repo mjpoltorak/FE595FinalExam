@@ -16,6 +16,14 @@ def pickle_predict(type, params):
             with open('svm.pkl', 'rb') as file:
                 svm = pickle.load(file)
                 prob = svm.predict(params_df)
+        elif type == 'random_forest':
+            with open('rf.pkl', 'rb') as file:
+                rf = pickle.load(file)
+                prob = rf.predict(params_df)
+        elif type == 'knn':
+            with open('knn.pkl', 'rb') as file:
+                knn = pickle.load(file)
+                prob = knn.predict(params_df)
         return prob
 
     except:
@@ -30,7 +38,7 @@ def help():
 @app.route('/predict', methods=['POST'])
 def predict():
     post_json = flask.request.json
-    type = post_json.get('type', 'logistic')
+    type = post_json.get('type', 'random_forest')
     receipts = post_json.get('receipts', None)
     disbursements = post_json.get('disbursements', None)
     cash_on_hand_end_period = post_json.get('cash_on_hand_end_period', None)

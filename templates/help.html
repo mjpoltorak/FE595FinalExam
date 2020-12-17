@@ -4,8 +4,8 @@
     All of our functions are accessed through the "/predict" endpoint. The endpoint accepts only a POST request,
     with required parameters ['receipts','disbursements','cash_on_hand_end_period','debts_owed_by_committee','percent_vote','num_terms'].
     All of these are required parameters corresponding to variables used in the machine learning models.
-    The last parameter is optional and is 'type' which indicates which type of model you want to use to run a prediction.
-    It is optional because the default is a logistic regression. The return is a prediction of whether the candidate will win (1=win, 0=lose).
+    The last parameter is optional and is 'type' which indicates which type of model you want to use to run a prediction. The possible types are random_forest, svm (support vector machine), logistic, knn (kmeans).
+    It is optional because the default is a random_forest regression. The return is a prediction of whether the candidate will win (1=win, 0=lose).
     The format of this must be valid JSON. See the below image for
     an example of how to use Postman to send a post request and what the format is for valid JSON.
     <!--https://stackoverflow.com/questions/42731376/flask-web-page-cannot-find-image-file-->
