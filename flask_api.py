@@ -7,11 +7,15 @@ app = flask.Flask(__name__)
 
 def pickle_predict(type, params):
     try:
+        params_df = pd.DataFrame(params, index=[1])
         if type == 'logistic':
             with open('logistic_regression.pkl', 'rb') as file:
                 logistic = pickle.load(file)
-                params_df = pd.DataFrame(params, index=[1])
                 prob = logistic.predict(params_df)
+        elif type == 'svm':
+            with open('svm.pkl', 'rb') as file:
+                svm = pickle.load(file)
+                prob = svm.predict(params_df)
         return prob
 
     except:
